@@ -1,11 +1,9 @@
 #pragma once
-#pragma once
-
 #include <cinttypes>
 #include <Windows.h>
 #include <Winternl.h>
 #include <stdio.h>
-
+#include <Tlhelp32.h>
 // Error Codes
 enum DBG_CATCH
 {
@@ -21,6 +19,7 @@ enum DBG_CATCH
 	DBG_OUTPUTDEBUGSTRING = 0x1006,
 	DBG_NTSETINFORMATIONTHREAD = 0x1007,
 	DBG_DEBUGACTIVEPROCESS = 0x1008,
+	DBG_PROCESSFILENAME = 0x1009,
 
 	// CPU Codes (0x2000 range)
 	DBG_HARDWAREDEBUGREGISTERS = 0x2000,
@@ -71,6 +70,7 @@ void adbg_BeingDebuggedPEB(void);
 void adbg_CheckRemoteDebuggerPresent(void);
 void adbg_CheckWindowClassName(void);
 void adbg_CheckWindowName(void);
+void adbg_ProcessFileName(void);
 void adbg_IsDebuggerPresent(void);
 void adbg_NtGlobalFlagPEB(void);
 void adbg_NtQueryInformationProcess(void);
@@ -85,6 +85,9 @@ void adbg_MovSS(void);
 void adbg_RDTSC(void);
 void adbg_QueryPerformanceCounter(void);
 void adbg_GetTickCount(void);
+
+// Other
+void adbg_CrashOllyDbg(void);
 
 // Exception
 void adbg_CloseHandleException(void);
